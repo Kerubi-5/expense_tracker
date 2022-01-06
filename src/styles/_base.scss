@@ -1,0 +1,43 @@
+* {
+  @include reset;
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  transition: 0.4s;
+}
+
+// REUSABLE CLASSES
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: #{"min(98%, 500px)"};
+  margin-inline: auto;
+}
+
+.full-width {
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.switchDarkMode {
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.2);
+  }
+  &:active,
+  &:focus {
+    transform: scale(0.7);
+  }
+}
