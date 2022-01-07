@@ -6,7 +6,6 @@ import { AuthProvider } from "../contexts/AuthContext";
 
 import Navbar from "../components/Navbar";
 import Main from "../components/Main";
-import Add from "../components/Add";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -26,7 +25,6 @@ function App() {
         <Paper className="full-width">
           <Navbar toggle={toggleDarkMode} darkMode={darkMode} />
           <Main />
-          <Add />
         </Paper>
       </ThemeProvider>
     </AuthProvider>

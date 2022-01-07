@@ -4,15 +4,15 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function BasicCard() {
+export default function Item({ item }) {
   return (
     <Card>
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
-          Category
+          {item.category}
         </Typography>
-        <Typography variant="body2">Ps</Typography>
-        <Typography color="text.secondary">&#8369;5000</Typography>
+        <Typography variant="body2">{item.desc}</Typography>
+        <Typography color="text.secondary">&#8369;{item.price}</Typography>
       </CardContent>
       <CardActions>
         <Button size="small">EDIT</Button>

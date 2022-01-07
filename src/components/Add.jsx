@@ -22,10 +22,51 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Add = () => {
+const Add = ({ items, setItems }) => {
   const [isOpen, setOpen] = useState(false);
+  const [category, setCategory] = useState("");
+  const [desc, setDesc] = useState("");
+  const [price, setPrice] = useState("");
+
+  const menuItems = [
+    {
+      name: "Food and Drink",
+      value: "food",
+    },
+    {
+      name: "Entertainment",
+      value: "entertainment",
+    },
+    {
+      name: "Clothing and Shoes",
+      value: "clothing",
+    },
+    {
+      name: "Medical",
+      value: "medical",
+    },
+    {
+      name: "Transportation",
+      value: "transportation",
+    },
+    {
+      name: "Miscellaneous",
+      value: "miscellaneous",
+    },
+  ];
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleAdd = () => {
+    const item = {
+      category,
+      desc,
+      price,
+    };
+
+    setItems((items) => [...items, item]);
     setOpen(false);
   };
 
@@ -59,13 +100,15 @@ const Add = () => {
               id="category-select"
               label="Category"
               defaultValue={"food"}
+              onChange={(event) => setCategory(event.target.value)}
             >
-              <MenuItem value={"food"}>Food and Drink</MenuItem>
-              <MenuItem value={"entertainment"}>Entertainment</MenuItem>
-              <MenuItem value={"clothing"}>Clothing and shoes</MenuItem>
-              <MenuItem value={"medical"}>Medical</MenuItem>
-              <MenuItem value={"transportation"}>Transportation</MenuItem>
-              <MenuItem value={"miscellaneous"}>Miscellaneous</MenuItem>
+              {menuItems.map((menu) => {
+                return (
+                  <MenuItem key={menu.name} value={menu.name}>
+                    {menu.name}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
           <TextField
@@ -76,6 +119,7 @@ const Add = () => {
             type="text"
             fullWidth
             variant="standard"
+            onChange={(event) => setDesc(event.target.value)}
           />
           <TextField
             autoFocus
@@ -85,11 +129,12 @@ const Add = () => {
             type="number"
             fullWidth
             variant="standard"
+            onChange={(event) => setPrice(event.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>CANCEL</Button>
-          <Button onClick={handleClose}>ADD</Button>
+          <Button onClick={handleAdd}>ADD</Button>
         </DialogActions>
       </Dialog>
     </>
