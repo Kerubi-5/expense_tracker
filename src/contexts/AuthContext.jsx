@@ -4,6 +4,9 @@ import { createContext, useContext } from "react";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, google_provider } from "../utils/firebase";
 
+// FIREBASE HOOKS
+import { useAuthState } from "react-firebase-hooks/auth";
+
 export const AuthContext = createContext(null);
 
 export const useAuth = () => {
@@ -11,6 +14,8 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const [user] = useAuthState(auth);
+
   const google = () => {
     signInWithPopup(auth, google_provider);
   };
@@ -20,6 +25,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const value = {
+    user,
     google,
     logout,
   };
