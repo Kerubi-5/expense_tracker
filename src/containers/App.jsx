@@ -7,8 +7,16 @@ import Navbar from "../components/Navbar";
 import Main from "../components/Main";
 import Add from "../components/Add";
 
+// FIREBASE AUTHENTICATION
+import { signInWithPopup } from "firebase/auth";
+import { auth, google_provider } from "../utils/firebase";
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+
+  const googleSignIn = () => {
+    signInWithPopup(auth, google_provider);
+  };
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
