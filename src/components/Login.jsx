@@ -12,25 +12,30 @@ import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { blue } from "@mui/material/colors";
 
-const auth_providers = [
-  {
-    icon: <FacebookIcon />,
-    text: "FACEBOOK",
-  },
-  {
-    icon: <GoogleIcon />,
-    text: "GOOGLE",
-  },
-];
+import { useAuth } from "../contexts/AuthContext";
 
 function SimpleDialog(props) {
+  const { google } = useAuth();
   const { onClose, open } = props;
+
+  const auth_providers = [
+    {
+      icon: <FacebookIcon />,
+      text: "FACEBOOK",
+    },
+    {
+      icon: <GoogleIcon />,
+      text: "GOOGLE",
+      auth: google,
+    },
+  ];
 
   const handleClose = () => {
     onClose();
   };
 
-  const handleListItemClick = (value) => {
+  const handleListItemClick = (auth) => {
+    if (auth) auth();
     onClose();
   };
 
@@ -39,7 +44,11 @@ function SimpleDialog(props) {
       <DialogTitle>Select a mode of login</DialogTitle>
       <List sx={{ pt: 0 }}>
         {auth_providers.map((provider) => (
-          <ListItem button key={provider.text} onClick={handleListItemClick}>
+          <ListItem
+            button
+            key={provider.text}
+            onClick={() => handleListItemClick(provider.auth)}
+          >
             <ListItemAvatar>
               <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                 {provider.icon}
