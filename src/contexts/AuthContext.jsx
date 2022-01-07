@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 // FIREBASE AUTHENTICATION
-import { signInWithPopup, signOut } from "firebase/auth";
+import { signInWithRedirect, signOut } from "firebase/auth";
 import { auth, google_provider } from "../utils/firebase";
 
 // FIREBASE HOOKS
@@ -14,10 +14,10 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   const google = () => {
-    signInWithPopup(auth, google_provider);
+    signInWithRedirect(auth, google_provider);
   };
 
   const logout = () => {
@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     user,
+    loading,
     google,
     logout,
   };

@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AuthProvider } from "../contexts/AuthContext";
 
 import Navbar from "../components/Navbar";
-import Main from "../components/Main";
+import Home from "./Home";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -24,7 +24,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Paper className="full-width">
           <Navbar toggle={toggleDarkMode} darkMode={darkMode} />
-          <Main />
+          <Home />
         </Paper>
       </ThemeProvider>
     </AuthProvider>

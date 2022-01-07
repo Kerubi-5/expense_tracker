@@ -6,15 +6,14 @@ import IconButton from "@mui/material/IconButton";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import Login from "./Login";
-import Logout from "./Logout"
+import Logout from "./Logout";
 
 import AppDrawer from "./AppDrawer";
 
 import { useAuth } from "../contexts/AuthContext";
 
-
 const Navbar = ({ toggle, darkMode }) => {
-  const {user} = useAuth()
+  const { user, loading } = useAuth();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -32,7 +31,7 @@ const Navbar = ({ toggle, darkMode }) => {
             KK App
           </Typography>
 
-          {user ? <Logout /> : <Login />}
+          {loading ? null : user ? <Logout /> : <Login />}
 
           {darkMode ? (
             <NightsStayIcon
