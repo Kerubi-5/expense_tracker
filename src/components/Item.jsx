@@ -12,11 +12,12 @@ export default function Item({ item }) {
           {item.category}
         </Typography>
         <Typography variant="body2">{item.desc}</Typography>
-        <Typography color="text.secondary">&#8369;{item.price}</Typography>
+        <Typography color="text.secondary">
+          TOTAL PRICE: &#8369;{item.price}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">EDIT</Button>
-        <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
   );

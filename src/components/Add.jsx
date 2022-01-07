@@ -16,6 +16,7 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 import Select from "@mui/material/Select";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -60,6 +61,8 @@ const Add = ({ items, setItems }) => {
   };
 
   const handleAdd = () => {
+    if (!category || !desc || !price) return;
+
     const item = {
       category,
       desc,
@@ -67,6 +70,10 @@ const Add = ({ items, setItems }) => {
     };
 
     setItems((items) => [...items, item]);
+
+    setDesc("");
+    setPrice("");
+
     setOpen(false);
   };
 
@@ -93,13 +100,18 @@ const Add = ({ items, setItems }) => {
       >
         <DialogTitle>Track a new expense</DialogTitle>
         <DialogContent dividers={true}>
-          <FormControl variant="standard" margin="dense" fullWidth>
+          <FormControl
+            variant="standard"
+            margin="dense"
+            fullWidth
+            error={category ? false : true}
+          >
             <InputLabel id="category">Category</InputLabel>
             <Select
               labelId="category-select-label"
               id="category-select"
               label="Category"
-              defaultValue={"food"}
+              defaultValue={category}
               onChange={(event) => setCategory(event.target.value)}
             >
               {menuItems.map((menu) => {
@@ -110,6 +122,7 @@ const Add = ({ items, setItems }) => {
                 );
               })}
             </Select>
+            <FormHelperText>Select a category</FormHelperText>
           </FormControl>
           <TextField
             autoFocus
@@ -119,7 +132,10 @@ const Add = ({ items, setItems }) => {
             type="text"
             fullWidth
             variant="standard"
+            value={desc}
             onChange={(event) => setDesc(event.target.value)}
+            error={desc ? false : true}
+            helperText={desc ? null : "Please enter a description"}
           />
           <TextField
             autoFocus
@@ -129,7 +145,10 @@ const Add = ({ items, setItems }) => {
             type="number"
             fullWidth
             variant="standard"
+            value={price}
             onChange={(event) => setPrice(event.target.value)}
+            error={price ? false : true}
+            helperText={price ? null : "Please enter a price"}
           />
         </DialogContent>
         <DialogActions>
