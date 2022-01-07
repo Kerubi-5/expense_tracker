@@ -52,6 +52,22 @@ const Add = () => {
       >
         <DialogTitle>Track a new expense</DialogTitle>
         <DialogContent dividers={true}>
+          <FormControl variant="standard" margin="dense" fullWidth>
+            <InputLabel id="category">Category</InputLabel>
+            <Select
+              labelId="category-select-label"
+              id="category-select"
+              label="Category"
+              defaultValue={"food"}
+            >
+              <MenuItem value={"food"}>Food and Drink</MenuItem>
+              <MenuItem value={"entertainment"}>Entertainment</MenuItem>
+              <MenuItem value={"clothing"}>Clothing and shoes</MenuItem>
+              <MenuItem value={"medical"}>Medical</MenuItem>
+              <MenuItem value={"transportation"}>Transportation</MenuItem>
+              <MenuItem value={"miscellaneous"}>Miscellaneous</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             autoFocus
             margin="dense"
@@ -70,22 +86,6 @@ const Add = () => {
             fullWidth
             variant="standard"
           />
-          <FormControl variant="standard" margin="dense" fullWidth>
-            <InputLabel id="category">Category</InputLabel>
-            <Select
-              labelId="category-select-label"
-              id="category-select"
-              label="Category"
-              defaultValue={"food"}
-            >
-              <MenuItem value={"food"}>Food and Drink</MenuItem>
-              <MenuItem value={"entertainment"}>Entertainment</MenuItem>
-              <MenuItem value={"clothing"}>Clothing and shoes</MenuItem>
-              <MenuItem value={"medical"}>Medical</MenuItem>
-              <MenuItem value={"transportation"}>Transportation</MenuItem>
-              <MenuItem value={"miscellaneous"}>Miscellaneous</MenuItem>
-            </Select>
-          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>CANCEL</Button>
