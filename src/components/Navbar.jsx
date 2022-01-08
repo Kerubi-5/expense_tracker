@@ -31,7 +31,7 @@ const Navbar = ({ toggle, darkMode }) => {
             KK App
           </Typography>
 
-          {loading ? null : user ? <Logout /> : <Login />}
+          {loading ? null : user ? <Logout /> : null}
 
           {darkMode ? (
             <NightsStayIcon
