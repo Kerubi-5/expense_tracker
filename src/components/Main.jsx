@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Item from "./Item";
 import Add from "../components/Add";
 
+// FIREBASE - STORE
 import { onSnapshot } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
