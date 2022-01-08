@@ -1,12 +1,20 @@
 import React from "react";
 import { useAuth } from "../contexts/AuthContext";
 
+// MUI COMPONENTS
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+
 import Main from "../components/Main";
 const Home = () => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <h1>Loading please wait</h1>;
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress />
+      </Box>
+    );
   }
 
   if (user)
@@ -17,7 +25,11 @@ const Home = () => {
       </>
     );
   else {
-    return null;
+    return (
+      <>
+        <h1>NOT HOME</h1>
+      </>
+    );
   }
 };
 

@@ -19,6 +19,9 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Select from "@mui/material/Select";
 
+import { addDoc, Timestamp } from "firebase/firestore";
+import { expensesRef } from "../utils/firebase";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -60,16 +63,17 @@ const Add = ({ items, setItems }) => {
     setOpen(false);
   };
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     if (!category || !desc || !price) return;
 
     const item = {
       category,
       desc,
       price,
+      date: Timestamp.now(),
     };
 
-    setItems((items) => [...items, item]);
+    await addDoc(expensesRef, item);
 
     setDesc("");
     setPrice("");
