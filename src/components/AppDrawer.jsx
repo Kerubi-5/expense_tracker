@@ -13,6 +13,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({ left: false });
 
+  // LIST OF CLICKABLE ITEMS
+  const linkItems = [
+    {
+      name: "Home",
+    },
+    {
+      name: "User",
+    },
+  ];
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -32,26 +42,16 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
+        {linkItems.map((link, index) => (
+          <ListItem button key={link.name}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={link.name} />
           </ListItem>
         ))}
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </Box>
   );
 
