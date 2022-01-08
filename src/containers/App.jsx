@@ -6,6 +6,10 @@ import { AuthProvider } from "../contexts/AuthContext";
 
 import Navbar from "../components/Navbar";
 import Home from "./Home";
+import About from "./About";
+
+// REACT - ROUTER
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -24,7 +28,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <Paper className="full-width">
           <Navbar toggle={toggleDarkMode} darkMode={darkMode} />
-          <Home />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="about" element={<About />} />
+          </Routes>
         </Paper>
       </ThemeProvider>
     </AuthProvider>

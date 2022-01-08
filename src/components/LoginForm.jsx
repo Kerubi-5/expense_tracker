@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext";
 
@@ -77,7 +77,7 @@ export default function SimpleContainer() {
           </Grid>
           <Grid item container>
             <Typography variant="subtitle1" gutterBottom component="div">
-              Dont have an account yet? <Link href="#">Sign up here</Link>
+              Dont have an account yet? <Link to="/about">Sign up here</Link>
             </Typography>
           </Grid>
         </Grid>
