@@ -22,15 +22,17 @@ const Main = () => {
   return (
     <>
       {user ? (
-        <Stack spacing={2} mt={2} mr={1} ml={1}>
-          {items.map((item) => {
-            return <Item key={item.id} item={item} />;
-          })}
-        </Stack>
+        <>
+          <Stack spacing={2} mt={2} mr={1} ml={1}>
+            {items.map((item) => {
+              return <Item key={item.id} item={item} />;
+            })}
+          </Stack>
+          <Add setItems={setItems} items={items} />
+        </>
       ) : (
         "Login to see content"
       )}
-      <Add setItems={setItems} items={items} />
     </>
   );
 };
