@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
 import Main from "../components/Main";
+import LoginForm from "../components/LoginForm";
+
 const Home = () => {
   const { user, loading } = useAuth();
 
@@ -27,7 +29,7 @@ const Home = () => {
   else {
     return (
       <>
-        <h1>NOT HOME</h1>
+        <LoginForm />
       </>
     );
   }

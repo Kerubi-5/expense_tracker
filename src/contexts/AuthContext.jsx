@@ -1,7 +1,12 @@
 import { createContext, useContext } from "react";
 
 // FIREBASE AUTHENTICATION
-import { signInWithRedirect, signOut } from "firebase/auth";
+import {
+  signInWithRedirect,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { auth, google_provider } from "../utils/firebase";
 
 // FIREBASE HOOKS
@@ -20,6 +25,30 @@ export const AuthProvider = ({ children }) => {
     signInWithRedirect(auth, google_provider);
   };
 
+  const signUp = (name, pass) => {
+    if (!name || !pass) return;
+
+    createUserWithEmailAndPassword(auth, name, pass)
+      .then(() => {
+        console.log("signUp success");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const signIn = (name, pass) => {
+    if (!name || !pass) return;
+
+    signInWithEmailAndPassword(auth, name, pass)
+      .then(() => {
+        console.log("sign in succesful");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const logout = () => {
     signOut(auth);
   };
@@ -28,6 +57,8 @@ export const AuthProvider = ({ children }) => {
     user,
     loading,
     google,
+    signUp,
+    signIn,
     logout,
   };
 
