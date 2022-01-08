@@ -1,5 +1,5 @@
 {
-  "name": "cordovaproject",
+  "name": "expense_tracker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
