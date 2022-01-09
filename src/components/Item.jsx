@@ -46,7 +46,7 @@ export default function Item({ item }) {
         </CardActions>
       </Card>
 
-      <ItemDialog action="set" open={isOpen} setOpen={setOpen} item={item} />
+      <ItemDialog action="SET" open={isOpen} setOpen={setOpen} item={item} />
     </>
   );
 }

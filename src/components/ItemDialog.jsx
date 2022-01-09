@@ -16,12 +16,12 @@ import { expensesRef } from "../utils/firebase";
 
 import { useState } from "react";
 
-const ItemDialog = ({ action, id, open, setOpen, item }) => {
+const ItemDialog = ({ action, open, setOpen, item }) => {
   const isOpen = open;
 
-  const [category, setCategory] = useState(item.category);
-  const [desc, setDesc] = useState(item.desc);
-  const [price, setPrice] = useState(item.price);
+  const [category, setCategory] = useState(item ? item.category : "");
+  const [desc, setDesc] = useState(item ? item.desc : "");
+  const [price, setPrice] = useState(item ? item.price : "");
 
   const menuItems = [
     {
@@ -51,27 +51,36 @@ const ItemDialog = ({ action, id, open, setOpen, item }) => {
   ];
 
   const actionTypes = {
-    set: "SET ITEM",
-    add: "ADD ITEM",
+    SET: "SET",
+    ADD: "ADD",
   };
 
   const handleClick = async () => {
     if (!category || !desc || !price) return;
-
-    const id = item.id;
-    const payload = {
-      category,
-      desc,
-      price,
-    };
-
-    console.log(item);
-    await setDoc(doc(expensesRef, id), payload);
-
-    // SET DOC HERE
-    setDesc("");
-    setPrice("");
     setOpen(false);
+
+    if (action === actionTypes.SET) {
+      const payload = {
+        category,
+        desc,
+        price,
+      };
+
+      await setDoc(doc(expensesRef, item.id), payload);
+    } else if (action === actionTypes.ADD) {
+      const item = {
+        category,
+        desc,
+        price,
+        date: Timestamp.now(),
+      };
+
+      // SET DOC HERE
+      setDesc("");
+      setPrice("");
+
+      await addDoc(expensesRef, item);
+    }
   };
   return (
     <>
@@ -96,7 +105,7 @@ const ItemDialog = ({ action, id, open, setOpen, item }) => {
               labelId="category-select-label"
               id="category-select"
               label="Category"
-              defaultValue={category}
+              value={category}
               onChange={(event) => setCategory(event.target.value)}
             >
               {menuItems.map((menu) => {
