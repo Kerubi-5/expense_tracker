@@ -1,38 +1,45 @@
-import React from "react";
+import Stack from "@mui/material/Stack";
+import { useState, useEffect } from "react";
+import Item from "../components/Item";
+import Add from "../components/Add";
+
+// FIREBASE - STORE
+import { onSnapshot, query, where } from "firebase/firestore";
+import { expensesRef } from "../utils/firebase";
+
 import { useAuth } from "../contexts/AuthContext";
 
-// MUI COMPONENTS
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
+const Main = () => {
+  const [items, setItems] = useState([]);
+  const { user } = useAuth();
+  const q = query(expensesRef, where("userId", "==", user.uid));
 
-import Main from "../components/Main";
-import LoginForm from "../components/LoginForm";
+  const displayItems = () => {
+    return items.map((item) => <Item key={item.id} item={item} />);
+  };
 
-const Home = () => {
-  const { user, loading } = useAuth();
+  useEffect(
+    () =>
+      onSnapshot(q, (snapshot) => {
+        setItems(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      }),
+    [q]
+  );
 
-  if (loading) {
-    return (
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress />
-      </Box>
-    );
-  }
-
-  if (user)
-    return (
-      <>
-        <h1>Home</h1>
-        <Main />
-      </>
-    );
-  else {
-    return (
-      <>
-        <LoginForm />
-      </>
-    );
-  }
+  return (
+    <>
+      {user ? (
+        <>
+          <Stack spacing={2} mt={2} mr={1} ml={1}>
+            {displayItems()}
+          </Stack>
+          <Add setItems={setItems} items={items} />
+        </>
+      ) : (
+        "Login to see content"
+      )}
+    </>
+  );
 };
 
-export default Home;
+export default Main;

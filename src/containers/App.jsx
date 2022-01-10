@@ -6,9 +6,11 @@ import { AuthProvider } from "../contexts/AuthContext";
 
 import Navbar from "../components/Navbar";
 import Home from "./Home";
+import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Analytics from "./Analytics";
 import ProfilePage from "./ProfilePage";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 // REACT - ROUTER
 import { Routes, Route } from "react-router-dom";
@@ -31,10 +33,13 @@ function App() {
         <Paper className="full-width">
           <Navbar toggle={toggleDarkMode} darkMode={darkMode} />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="login" element={<SignIn />} />
             <Route path="register" element={<SignUp />} />
-            <Route path="analytics" element={<Analytics />} />
-            <Route path="profile" element={<ProfilePage />} />
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/" element={<Home />} />
+              <Route path="analytics" element={<Analytics />} />
+              <Route path="profile" element={<ProfilePage />} />
+            </Route>
           </Routes>
         </Paper>
       </ThemeProvider>
