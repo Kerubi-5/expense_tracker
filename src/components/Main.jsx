@@ -4,13 +4,15 @@ import Item from "./Item";
 import Add from "../components/Add";
 
 // FIREBASE - STORE
-import { onSnapshot } from "firebase/firestore";
+import { onSnapshot, query, where } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
 import { useAuth } from "../contexts/AuthContext";
+
 const Main = () => {
   const [items, setItems] = useState([]);
   const { user } = useAuth();
+  const q = query(expensesRef, where("userId", "==", user.uid));
 
   const displayItems = () => {
     return items.map((item) => <Item key={item.id} item={item} />);
@@ -18,10 +20,10 @@ const Main = () => {
 
   useEffect(
     () =>
-      onSnapshot(expensesRef, (snapshot) => {
+      onSnapshot(q, (snapshot) => {
         setItems(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       }),
-    []
+    [q]
   );
 
   return (

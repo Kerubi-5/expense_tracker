@@ -11,6 +11,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
+import { useAuth } from "../contexts/AuthContext";
 import { doc, setDoc, addDoc, Timestamp } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
@@ -22,6 +23,8 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
   const [category, setCategory] = useState(item ? item.category : "");
   const [desc, setDesc] = useState(item ? item.desc : "");
   const [price, setPrice] = useState(item ? item.price : "");
+
+  const { user } = useAuth();
 
   const menuItems = [
     {
@@ -60,19 +63,25 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
     setOpen(false);
 
     if (action === actionTypes.SET) {
-      const payload = {
-        category,
-        desc,
-        price,
-      };
+      const payload = [
+        {
+          category: category,
+          desc: desc,
+          price: price,
+        },
+        {
+          merge: true,
+        },
+      ];
 
-      await setDoc(doc(expensesRef, item.id), payload);
+      await setDoc(doc(expensesRef, item.id), ...payload);
     } else if (action === actionTypes.ADD) {
       const item = {
         category,
         desc,
         price,
         createdAt: Timestamp.now(),
+        userId: user.uid,
       };
 
       // SET DOC HERE
