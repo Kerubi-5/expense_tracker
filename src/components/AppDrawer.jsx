@@ -56,7 +56,7 @@ export default function TemporaryDrawer() {
       <List>
         {linkItems.map((link) => (
           <Link key={link.name} to={link.link} className="nav-link">
-            <ListItem button key={link.name}>
+            <ListItem button key={link.name} sx={{ color: "gray" }}>
               <ListItemIcon>{link.icon}</ListItemIcon>
               <ListItemText primary={link.name} />
             </ListItem>
