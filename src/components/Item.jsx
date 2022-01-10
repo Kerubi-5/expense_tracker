@@ -21,6 +21,19 @@ export default function Item({ item }) {
     await deleteDoc(doc(expensesRef, item.id));
   };
 
+  // DATE FORMAT
+  var options = {
+    weekday: "long",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  };
+
+  const myDate = new Date(item.createdAt.toDate()).toLocaleDateString(
+    "en-US",
+    options
+  );
+
   return (
     <>
       <Card>
@@ -28,7 +41,9 @@ export default function Item({ item }) {
           <Typography variant="h5" component="div" gutterBottom>
             {item.category}
           </Typography>
-
+          <Typography variant="body2" gutterBottom>
+            {myDate}
+          </Typography>
           <Typography variant="body2" gutterBottom>
             {item.desc}
           </Typography>

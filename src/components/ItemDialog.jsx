@@ -72,7 +72,7 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
         category,
         desc,
         price,
-        date: Timestamp.now(),
+        createdAt: Timestamp.now(),
       };
 
       // SET DOC HERE

@@ -12,6 +12,10 @@ const Main = () => {
   const [items, setItems] = useState([]);
   const { user } = useAuth();
 
+  const displayItems = () => {
+    return items.map((item) => <Item key={item.id} item={item} />);
+  };
+
   useEffect(
     () =>
       onSnapshot(expensesRef, (snapshot) => {
@@ -25,9 +29,7 @@ const Main = () => {
       {user ? (
         <>
           <Stack spacing={2} mt={2} mr={1} ml={1}>
-            {items.map((item) => {
-              return <Item key={item.id} item={item} />;
-            })}
+            {displayItems()}
           </Stack>
           <Add setItems={setItems} items={items} />
         </>
