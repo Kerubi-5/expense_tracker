@@ -11,7 +11,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext";
 
@@ -22,7 +22,7 @@ export default function SimpleContainer() {
   const [isClicked, setIsClicked] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
   const [isVisible, setVisibility] = React.useState(false);
-  const { signUp, user } = useAuth();
+  const { signUp } = useAuth();
 
   const handleClick = async () => {
     const myMessage = await signUp(email, pass, pass2);
@@ -37,10 +37,11 @@ export default function SimpleContainer() {
         <Grid container direction="column" alignItems="center" spacing={3}>
           <Grid item container>
             <Typography variant="h2" component="div" gutterBottom mt={5}>
-              Sign In
+              Sign Up
             </Typography>
-
-            {errorMsg ? <Alert severity="error">{errorMsg}</Alert> : null}
+            <Grid item container>
+              {errorMsg ? <Alert severity="error">{errorMsg}</Alert> : null}
+            </Grid>
           </Grid>
           <Grid item container>
             <TextField

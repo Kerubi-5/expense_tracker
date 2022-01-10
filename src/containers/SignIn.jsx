@@ -38,7 +38,8 @@ export default function SignIn() {
             <Typography variant="h2" component="div" gutterBottom mt={5}>
               Sign In
             </Typography>
-
+          </Grid>
+          <Grid item container>
             {errorMsg ? <Alert severity="error">{errorMsg}</Alert> : null}
           </Grid>
           <Grid item container>
