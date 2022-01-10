@@ -150,7 +150,6 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
           <Button onClick={handleClick}>SUBMIT</Button>
         </DialogActions>
       </Dialog>
-      ;
     </>
   );
 };
