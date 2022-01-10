@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
+import Error from "./Error";
+
 import { useAuth } from "../contexts/AuthContext";
 
 const Analytics = () => {
@@ -17,7 +19,7 @@ const Analytics = () => {
   if (user) {
     return <div>Hello from analytics</div>;
   } else {
-    return "Please login to see the content";
+    return <Error />;
   }
 };
 

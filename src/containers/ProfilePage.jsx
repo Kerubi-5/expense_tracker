@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
+import Error from "./Error";
+
 import { useAuth } from "../contexts/AuthContext";
 
 const ProfilePage = () => {
@@ -23,7 +25,7 @@ const ProfilePage = () => {
       </div>
     );
   } else {
-    return "Please login to see the content";
+    return <Error />;
   }
 };
 
