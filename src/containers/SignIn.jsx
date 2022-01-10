@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext";
 
-export default function SimpleContainer() {
+export default function SignIn() {
   const [email, setEmail] = React.useState("");
   const [pass, setPass] = React.useState("");
   const [isClicked, setIsClicked] = React.useState(false);
@@ -90,7 +90,7 @@ export default function SimpleContainer() {
           </Grid>
           <Grid item container>
             <Typography variant="subtitle1" gutterBottom component="div">
-              Dont have an account yet? <Link to="/about">Sign up here</Link>
+              Dont have an account yet? <Link to="/register">Sign up here</Link>
             </Typography>
           </Grid>
         </Grid>
