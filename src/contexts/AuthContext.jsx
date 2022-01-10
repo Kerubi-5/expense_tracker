@@ -32,21 +32,27 @@ export const AuthProvider = ({ children }) => {
       .then(() => {
         console.log("signUp success");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        const errorMessage = error.message;
+
+        return errorMessage;
       });
   };
 
-  const signIn = (name, pass) => {
+  const signIn = async (name, pass) => {
     if (!name || !pass) return;
 
-    signInWithEmailAndPassword(auth, name, pass)
+    const message = await signInWithEmailAndPassword(auth, name, pass)
       .then(() => {
-        console.log("sign in succesful");
+        return "succesful sign in";
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        const errorMessage = error.message;
+
+        return errorMessage;
       });
+
+    return message;
   };
 
   const logout = () => {
