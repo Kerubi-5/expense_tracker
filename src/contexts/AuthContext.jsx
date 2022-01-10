@@ -25,18 +25,20 @@ export const AuthProvider = ({ children }) => {
     signInWithRedirect(auth, google_provider);
   };
 
-  const signUp = (name, pass) => {
-    if (!name || !pass) return;
+  const signUp = (name, pass, passConfirm) => {
+    if (!name || !pass || !passConfirm) return;
 
-    createUserWithEmailAndPassword(auth, name, pass)
-      .then(() => {
-        console.log("signUp success");
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
+    if (pass === passConfirm)
+      return createUserWithEmailAndPassword(auth, name, pass)
+        .then(() => {
+          signInWithEmailAndPassword(auth, name, pass);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
 
-        return errorMessage;
-      });
+          return errorMessage;
+        });
+    else return "Passwords do not match";
   };
 
   const signIn = async (name, pass) => {
