@@ -54,8 +54,8 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {linkItems.map((link, index) => (
-          <Link to={link.link} className="nav-link">
+        {linkItems.map((link) => (
+          <Link key={link.name} to={link.link} className="nav-link">
             <ListItem button key={link.name}>
               <ListItemIcon>{link.icon}</ListItemIcon>
               <ListItemText primary={link.name} />
