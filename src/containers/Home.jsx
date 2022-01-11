@@ -23,7 +23,8 @@ const Main = () => {
       onSnapshot(q, (snapshot) => {
         setItems(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       }),
-    [q]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   return (
