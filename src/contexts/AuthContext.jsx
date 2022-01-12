@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { walletRef } from "../utils/firebase";
+import { doc, setDoc } from "firebase/firestore";
 import { auth, google_provider } from "../utils/firebase";
 
 // FIREBASE HOOKS
@@ -30,8 +32,14 @@ export const AuthProvider = ({ children }) => {
 
     if (pass === passConfirm)
       return createUserWithEmailAndPassword(auth, name, pass)
-        .then(() => {
-          signInWithEmailAndPassword(auth, name, pass);
+        .then(async (userCredential) => {
+          const user = userCredential.user;
+          const walletDoc = doc(walletRef, user.uid);
+
+          await signInWithEmailAndPassword(auth, name, pass);
+          await setDoc(walletDoc, {
+            money: 0,
+          });
         })
         .catch((error) => {
           const errorMessage = error.message;

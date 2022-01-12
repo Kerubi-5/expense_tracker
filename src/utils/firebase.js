@@ -23,3 +23,4 @@ export const google_provider = new GoogleAuthProvider();
 
 export const db = getFirestore(app);
 export const expensesRef = collection(db, "expenses");
+export const walletRef = collection(db, "wallets");
