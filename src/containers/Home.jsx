@@ -5,7 +5,7 @@ import Add from "../components/Add";
 import Toolbar from "../components/Toolbar";
 
 // FIREBASE - STORE
-import { onSnapshot, query, where, orderBy } from "firebase/firestore";
+import { onSnapshot, query, where, orderBy, limit } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
 import { useAuth } from "../contexts/AuthContext";
@@ -15,7 +15,12 @@ const Main = () => {
 
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState(
-    query(expensesRef, where("userId", "==", user.uid), orderBy("createdAt"))
+    query(
+      expensesRef,
+      where("userId", "==", user.uid),
+      orderBy("createdAt", "desc"),
+      limit(25)
+    )
   );
 
   const displayItems = () => {
@@ -25,7 +30,6 @@ const Main = () => {
   useEffect(
     () =>
       onSnapshot(filter, (snapshot) => {
-        console.log(filter);
         setItems(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       }),
     [filter]
