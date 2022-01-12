@@ -16,7 +16,7 @@ import Calendar from "./Calendar";
 
 import { useAuth } from "../contexts/AuthContext";
 import { doc, setDoc, addDoc } from "firebase/firestore";
-import { expensesRef } from "../utils/firebase";
+import { expensesRef, walletRef } from "../utils/firebase";
 
 import { useState } from "react";
 
@@ -74,6 +74,11 @@ const ItemDialog = ({ action, open, setOpen, item, wallet }) => {
         setOpen(false);
         setErrors({ error: false });
 
+        const walletDoc = doc(walletRef, user.uid);
+
+        await setDoc(walletDoc, {
+          money: Number(wallet.money) - Number(price),
+        });
         await addDoc(expensesRef, item);
       } else {
         setErrors({
