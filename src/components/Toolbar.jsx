@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import { query, where, orderBy } from "firebase/firestore";
+import { query, where, orderBy, limit } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
 const Toolbar = ({ setValue, user }) => {
@@ -20,7 +20,8 @@ const Toolbar = ({ setValue, user }) => {
           expensesRef,
           where("userId", "==", user.uid),
           where("category", "==", e),
-          orderBy("createdAt")
+          orderBy("createdAt", "desc"),
+          limit(25)
         )
       );
     else
@@ -28,7 +29,8 @@ const Toolbar = ({ setValue, user }) => {
         query(
           expensesRef,
           where("userId", "==", user.uid),
-          orderBy("createdAt")
+          orderBy("createdAt", "desc"),
+          limit(25)
         )
       );
   };
