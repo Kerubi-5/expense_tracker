@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import { query, where, orderBy, limit } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
+import menuItems from "../utils/menuItems";
+
 const Toolbar = ({ setValue, user }) => {
   const [filter, setFilter] = useState("");
 
@@ -34,33 +36,6 @@ const Toolbar = ({ setValue, user }) => {
         )
       );
   };
-  const menuItems = [
-    {
-      name: "Food and Drink",
-      value: "food",
-    },
-    {
-      name: "Entertainment",
-      value: "entertainment",
-    },
-    {
-      name: "Clothing and Shoes",
-      value: "clothing",
-    },
-    {
-      name: "Medical",
-      value: "medical",
-    },
-    {
-      name: "Transportation",
-      value: "transportation",
-    },
-    {
-      name: "Miscellaneous",
-      value: "miscellaneous",
-    },
-  ];
-
   return (
     <div className="toolbar">
       <div className="toolbar__title">

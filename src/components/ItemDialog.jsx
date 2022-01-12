@@ -19,6 +19,8 @@ import { expensesRef } from "../utils/firebase";
 
 import { useState } from "react";
 
+import menuItems from "../utils/menuItems";
+
 const ItemDialog = ({ action, open, setOpen, item }) => {
   const isOpen = open;
 
@@ -28,33 +30,6 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
   const [date, setDate] = useState(new Date());
 
   const { user } = useAuth();
-
-  const menuItems = [
-    {
-      name: "Food and Drink",
-      value: "food",
-    },
-    {
-      name: "Entertainment",
-      value: "entertainment",
-    },
-    {
-      name: "Clothing and Shoes",
-      value: "clothing",
-    },
-    {
-      name: "Medical",
-      value: "medical",
-    },
-    {
-      name: "Transportation",
-      value: "transportation",
-    },
-    {
-      name: "Miscellaneous",
-      value: "miscellaneous",
-    },
-  ];
 
   const actionTypes = {
     SET: "SET",
