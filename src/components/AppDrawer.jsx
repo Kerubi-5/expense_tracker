@@ -10,6 +10,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import EqualizerOutlinedIcon from "@mui/icons-material/EqualizerOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 import { Link } from "react-router-dom";
 
@@ -22,6 +23,11 @@ export default function TemporaryDrawer() {
       name: "Home",
       link: "/",
       icon: <HomeOutlinedIcon />,
+    },
+    {
+      name: "Wallet",
+      link: "/wallet",
+      icon: <AccountBalanceWalletIcon />,
     },
     {
       name: "Analytics",

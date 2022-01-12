@@ -5,7 +5,7 @@ import Add from "../components/Add";
 import Toolbar from "../components/Toolbar";
 
 // FIREBASE - STORE
-import { onSnapshot, query, where } from "firebase/firestore";
+import { onSnapshot, query, where, orderBy } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
 import { useAuth } from "../contexts/AuthContext";
@@ -15,7 +15,7 @@ const Main = () => {
 
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState(
-    query(expensesRef, where("userId", "==", user.uid))
+    query(expensesRef, where("userId", "==", user.uid), orderBy("createdAt"))
   );
 
   const displayItems = () => {

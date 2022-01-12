@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import Home from "./Home";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import Wallet from "./Wallet";
 import Analytics from "./Analytics";
 import ProfilePage from "./ProfilePage";
 import ProtectedRoutes from "./ProtectedRoutes";
@@ -37,6 +38,7 @@ function App() {
             <Route path="register" element={<SignUp />} />
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Home />} />
+              <Route path="wallet" element={<Wallet />} />
               <Route path="analytics" element={<Analytics />} />
               <Route path="profile" element={<ProfilePage />} />
             </Route>
