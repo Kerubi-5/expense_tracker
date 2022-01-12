@@ -1,32 +1,111 @@
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
+import { useState } from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
-import Error from "./Error";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 import { useAuth } from "../contexts/AuthContext";
 
+import { updateProfile } from "firebase/auth";
+import { auth } from "../utils/firebase";
+
 const ProfilePage = () => {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
+  const [displayName, setDisplayName] = useState(user.displayName);
+  // const [username, setUsername] = useState(user.username);
+  // const [email, setEmail] = useState(user.email);
+  const [number, setNumber] = useState(
+    user.phoneNumber ? user.phoneNumber : ""
+  );
+  const [editable, setEditable] = useState(false);
 
-  if (loading) {
-    return (
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress />
-      </Box>
-    );
-  }
+  const handleSubmit = () => {
+    console.log(number);
+    console.log(user);
+    setEditable(false);
 
-  if (user) {
-    return (
-      <div>
-        Hello from user
-        <h1>Hello</h1>
-        your name is {user.email}
-      </div>
-    );
-  } else {
-    return <Error />;
-  }
+    updateProfile(auth.currentUser, {
+      displayName: displayName,
+      phoneNumber: number,
+    });
+  };
+
+  return (
+    <>
+      <CssBaseline />
+      <Container fixed>
+        <div className="profile-page">
+          {editable ? (
+            <Avatar
+              sx={{
+                width: 64,
+                height: 64,
+                alignSelf: "center",
+                cursor: "pointer",
+              }}
+            >
+              <input type="file" hidden />
+              <ModeEditIcon />
+            </Avatar>
+          ) : (
+            <Avatar
+              alt={user.displayName ? user.displayName : "N/A"}
+              src={user.photoURL}
+              sx={{
+                width: 64,
+                height: 64,
+                alignSelf: "center",
+              }}
+            />
+          )}
+
+          <Button variant="outlined" onClick={() => setEditable(!editable)}>
+            EDIT USER
+          </Button>
+          <TextField
+            id="displayName"
+            label="Display name"
+            variant="outlined"
+            value={displayName}
+            disabled={editable ? false : true}
+            onChange={(event) => setDisplayName(event.target.value)}
+          />
+          {/* <TextField
+            id="username"
+            label="Username"
+            variant="outlined"
+            value={username}
+            disabled={editable ? false : true}
+            onChange={(event) => setUsername(event.target.value)}
+          /> */}
+          {/* <TextField
+            id="email"
+            label="Email"
+            variant="outlined"
+            value={email}
+            disabled={editable ? false : true}
+            onChange={(event) => setEmail(event.target.value)}
+          /> */}
+          <TextField
+            id="number"
+            label="Phone number"
+            variant="outlined"
+            value={number}
+            disabled={editable ? false : true}
+            onChange={(event) => setNumber(event.target.value)}
+          />
+          {editable && (
+            <Button variant="contained" onClick={() => handleSubmit()}>
+              SUBMIT
+            </Button>
+          )}
+        </div>
+      </Container>
+    </>
+  );
 };
 
 export default ProfilePage;
