@@ -11,6 +11,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
+import Calendar from "./Calendar";
+
 import { useAuth } from "../contexts/AuthContext";
 import { doc, setDoc, addDoc, Timestamp } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
@@ -23,6 +25,7 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
   const [category, setCategory] = useState(item ? item.category : "");
   const [desc, setDesc] = useState(item ? item.desc : "");
   const [price, setPrice] = useState(item ? item.price : "");
+  const [date, setDate] = useState(new Date());
 
   const { user } = useAuth();
 
@@ -59,7 +62,7 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
   };
 
   const handleClick = async () => {
-    if (!category || !desc || !price) return;
+    if (!category || !desc || !price || !date) return;
     setOpen(false);
 
     if (action === actionTypes.SET) {
@@ -68,6 +71,7 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
           category: category,
           desc: desc,
           price: price,
+          createdAt: date,
         },
         {
           merge: true,
@@ -80,7 +84,7 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
         category,
         desc,
         price,
-        createdAt: Timestamp.now(),
+        createdAt: date,
         userId: user.uid,
       };
 
@@ -153,6 +157,9 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
             error={price ? false : true}
             helperText={price ? null : "Please enter a price"}
           />
+          <div className="date-picker">
+            <Calendar date={date} setDate={setDate} />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>CANCEL</Button>

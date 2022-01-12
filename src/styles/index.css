@@ -91,4 +91,9 @@ body {
 .toolbar__filter input {
   min-width: 2rem;
 }
+
+.date-picker div {
+  margin-top: 0.5rem;
+  width: 100%;
+}
 /*# sourceMappingURL=index.css.map */
