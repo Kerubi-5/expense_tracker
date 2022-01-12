@@ -22,9 +22,9 @@ const Wallet = () => {
       const walletDoc = doc(walletRef, user.uid);
       const walletData = await getDoc(walletDoc);
       setWallet(walletData.data());
-      console.log("mice");
     };
     return getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addFunds = async () => {
