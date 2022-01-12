@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import { onSnapshot, query, where } from "firebase/firestore";
+import { query, where } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
 const Toolbar = ({ setValue, user }) => {
