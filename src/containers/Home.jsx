@@ -2,6 +2,7 @@ import Stack from "@mui/material/Stack";
 import { useState, useEffect } from "react";
 import Item from "../components/Item";
 import Add from "../components/Add";
+import Toolbar from "../components/Toolbar";
 
 // FIREBASE - STORE
 import { onSnapshot, query, where } from "firebase/firestore";
@@ -10,9 +11,12 @@ import { expensesRef } from "../utils/firebase";
 import { useAuth } from "../contexts/AuthContext";
 
 const Main = () => {
-  const [items, setItems] = useState([]);
   const { user } = useAuth();
-  const q = query(expensesRef, where("userId", "==", user.uid));
+
+  const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState(
+    query(expensesRef, where("userId", "==", user.uid))
+  );
 
   const displayItems = () => {
     return items.map((item) => <Item key={item.id} item={item} />);
@@ -20,17 +24,18 @@ const Main = () => {
 
   useEffect(
     () =>
-      onSnapshot(q, (snapshot) => {
+      onSnapshot(filter, (snapshot) => {
+        console.log(filter);
         setItems(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [filter]
   );
 
   return (
     <>
       {user ? (
         <>
+          <Toolbar setValue={setFilter} user={user} />
           <Stack spacing={2} mt={2} mr={1} ml={1}>
             {displayItems()}
           </Stack>

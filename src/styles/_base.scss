@@ -41,3 +41,21 @@ body {
     transform: scale(0.7);
   }
 }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  &__filter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 5rem;
+    flex-grow: 1;
+    & input {
+      min-width: 2rem;
+    }
+  }
+}
