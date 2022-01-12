@@ -77,10 +77,11 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  max-width: 15rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-left: 5rem;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;

@@ -50,8 +50,9 @@ body {
   margin-left: 0.5rem;
   &__filter {
     display: flex;
+    max-width: 15rem;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     margin-left: 5rem;
     flex-grow: 1;
     & input {
