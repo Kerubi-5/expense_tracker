@@ -30,7 +30,6 @@ const Analytics = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
@@ -47,7 +46,6 @@ const Analytics = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
@@ -64,7 +62,6 @@ const Analytics = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
@@ -81,7 +78,6 @@ const Analytics = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
@@ -98,7 +94,6 @@ const Analytics = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
@@ -115,7 +110,6 @@ const Analytics = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
