@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import Calendar from "./Calendar";
 
 import { useAuth } from "../contexts/AuthContext";
-import { doc, setDoc, addDoc, Timestamp } from "firebase/firestore";
+import { doc, setDoc, addDoc } from "firebase/firestore";
 import { expensesRef } from "../utils/firebase";
 
 import { useState } from "react";
