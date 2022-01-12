@@ -55,7 +55,7 @@ const Toolbar = ({ setValue, user }) => {
     <div className="toolbar">
       <div className="toolbar__title">
         <Typography variant="h6" gutterBottom component="div">
-          HOME
+          Good day! {user.displayName}
         </Typography>
       </div>
       <div className="toolbar__filter">

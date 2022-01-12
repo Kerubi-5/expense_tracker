@@ -15,21 +15,14 @@ import { auth } from "../utils/firebase";
 const ProfilePage = () => {
   const { user } = useAuth();
   const [displayName, setDisplayName] = useState(user.displayName);
-  // const [username, setUsername] = useState(user.username);
   // const [email, setEmail] = useState(user.email);
-  const [number, setNumber] = useState(
-    user.phoneNumber ? user.phoneNumber : ""
-  );
   const [editable, setEditable] = useState(false);
 
   const handleSubmit = () => {
-    console.log(number);
-    console.log(user);
     setEditable(false);
 
     updateProfile(auth.currentUser, {
       displayName: displayName,
-      phoneNumber: number,
     });
   };
 
@@ -47,7 +40,6 @@ const ProfilePage = () => {
                 cursor: "pointer",
               }}
             >
-              <input type="file" hidden />
               <ModeEditIcon />
             </Avatar>
           ) : (
@@ -73,6 +65,7 @@ const ProfilePage = () => {
             disabled={editable ? false : true}
             onChange={(event) => setDisplayName(event.target.value)}
           />
+
           {/* <TextField
             id="username"
             label="Username"
@@ -85,18 +78,11 @@ const ProfilePage = () => {
             id="email"
             label="Email"
             variant="outlined"
+            type="email"
             value={email}
             disabled={editable ? false : true}
             onChange={(event) => setEmail(event.target.value)}
           /> */}
-          <TextField
-            id="number"
-            label="Phone number"
-            variant="outlined"
-            value={number}
-            disabled={editable ? false : true}
-            onChange={(event) => setNumber(event.target.value)}
-          />
           {editable && (
             <Button variant="contained" onClick={() => handleSubmit()}>
               SUBMIT
