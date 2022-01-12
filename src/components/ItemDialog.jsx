@@ -10,6 +10,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
 
 import Calendar from "./Calendar";
 
@@ -21,13 +22,14 @@ import { useState } from "react";
 
 import menuItems from "../utils/menuItems";
 
-const ItemDialog = ({ action, open, setOpen, item }) => {
+const ItemDialog = ({ action, open, setOpen, item, wallet }) => {
   const isOpen = open;
 
   const [category, setCategory] = useState(item ? item.category : "");
   const [desc, setDesc] = useState(item ? item.desc : "");
   const [price, setPrice] = useState(item ? item.price : "");
   const [date, setDate] = useState(new Date());
+  const [errors, setErrors] = useState({ error: false, msg: "" });
 
   const { user } = useAuth();
 
@@ -38,7 +40,6 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
 
   const handleClick = async () => {
     if (!category || !desc || !price || !date) return;
-    setOpen(false);
 
     if (action === actionTypes.SET) {
       const payload = [
@@ -53,21 +54,33 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
         },
       ];
 
+      setOpen(false);
+      setErrors({ error: false });
+
       await setDoc(doc(expensesRef, item.id), ...payload);
     } else if (action === actionTypes.ADD) {
-      const item = {
-        category,
-        desc,
-        price,
-        createdAt: date,
-        userId: user.uid,
-      };
+      if (wallet.money >= price) {
+        const item = {
+          category,
+          desc,
+          price,
+          createdAt: date,
+          userId: user.uid,
+        };
 
-      // SET DOC HERE
-      setDesc("");
-      setPrice("");
+        // SET DOC HERE
+        setDesc("");
+        setPrice("");
+        setOpen(false);
+        setErrors({ error: false });
 
-      await addDoc(expensesRef, item);
+        await addDoc(expensesRef, item);
+      } else {
+        setErrors({
+          error: true,
+          msg: "Price must not exceed your wallet balance",
+        });
+      }
     }
   };
   return (
@@ -82,6 +95,8 @@ const ItemDialog = ({ action, open, setOpen, item }) => {
       >
         <DialogTitle>{actionTypes[action]}</DialogTitle>
         <DialogContent dividers={true}>
+          {errors.error && <Alert severity="warning">{errors.msg}</Alert>}
+
           <FormControl
             variant="standard"
             margin="dense"
