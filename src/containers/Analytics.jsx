@@ -14,106 +14,111 @@ import medical from "../assets/medical.jpg";
 import transportation from "../assets/transportation.jpg";
 import misc from "../assets/misc.png";
 
+import { Outlet } from "react-router-dom";
+
 const Analytics = () => {
   return (
-    <Stack spacing={2} mt={2} mr={1} ml={1}>
-      <Card>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={clothing}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Clothing and Shoes
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={entertainment}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Entertainment
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={food_and_drinks}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Food and Drink
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={medical}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Medical
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={transportation}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Transportation
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={misc}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Clothing and Shoes
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-    </Stack>
+    <>
+      <Outlet />
+      <Stack spacing={2} mt={2} mr={1} ml={1}>
+        <Card>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="140"
+            image={clothing}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Clothing and Shoes
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+        <Card>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="140"
+            image={entertainment}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Entertainment
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+        <Card>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="140"
+            image={food_and_drinks}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Food and Drink
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+        <Card>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="140"
+            image={medical}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Medical
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+        <Card>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="140"
+            image={transportation}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Transportation
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+        <Card>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="140"
+            image={misc}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Clothing and Shoes
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+      </Stack>
+    </>
   );
 };
 

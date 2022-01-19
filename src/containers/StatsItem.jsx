@@ -13,6 +13,15 @@ import Typography from "@mui/material/Typography";
 
 import { format, parseISO, subDays } from "date-fns";
 
+import { useParams } from "react-router-dom";
+
+import { useAuth } from "../contexts/AuthContext";
+import menuItems from "../utils/menuItems";
+import { expensesRef } from "../utils/firebase";
+import { doc, getDoc } from "firebase/firestore";
+
+import { useState, useEffect } from "react";
+
 const data = [];
 for (let num = 30; num >= 0; num--) {
   data.push({
@@ -22,10 +31,29 @@ for (let num = 30; num >= 0; num--) {
 }
 
 export default function Home() {
+  const params = useParams();
+  const { user } = useAuth();
+  const [expenses, setExpenses] = useState("");
+  const [menuItem, setMenuItem] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      const expensesDoc = doc(expensesRef, user.uid);
+      const expensesData = await getDoc(expensesDoc);
+      setMenuItem(() => {
+        return menuItems.find((item) => {
+          return item.value === params.analyticCategory;
+        });
+      });
+      setExpenses(expensesData.data());
+    };
+    return getData();
+  }, []);
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom component="div">
-        Food and Drinks January Expenses
+        {menuItem.name} Monthly Expenses
       </Typography>
       <ResponsiveContainer width="100%" height={500}>
         <AreaChart data={data}>

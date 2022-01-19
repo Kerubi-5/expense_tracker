@@ -10,6 +10,8 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Wallet from "./Wallet";
 import Analytics from "./Analytics";
+import StatsItem from "./StatsItem";
+
 import ProfilePage from "./ProfilePage";
 import ProtectedRoutes from "./ProtectedRoutes";
 
@@ -39,7 +41,9 @@ function App() {
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Home />} />
               <Route path="wallet" element={<Wallet />} />
-              <Route path="analytics" element={<Analytics />} />
+              <Route path="analytics" element={<Analytics />}>
+                <Route path=":analyticCategory" element={<StatsItem />} />
+              </Route>
               <Route path="profile" element={<ProfilePage />} />
             </Route>
           </Routes>
