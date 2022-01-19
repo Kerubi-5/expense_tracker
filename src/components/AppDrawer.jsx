@@ -30,8 +30,8 @@ export default function TemporaryDrawer() {
       icon: <AccountBalanceWalletIcon />,
     },
     {
-      name: "Analytics",
-      link: "/analytics",
+      name: "Graph",
+      link: "/graph",
       icon: <EqualizerOutlinedIcon />,
     },
     {

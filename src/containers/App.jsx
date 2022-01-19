@@ -9,14 +9,14 @@ import Home from "./Home";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Wallet from "./Wallet";
-import Analytics from "./Analytics";
-import StatsItem from "./StatsItem";
+import StatsItems from "./StatsItems";
 
 import ProfilePage from "./ProfilePage";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 // REACT - ROUTER
 import { Routes, Route } from "react-router-dom";
+import NotFound from "./NotFound";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -41,11 +41,10 @@ function App() {
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Home />} />
               <Route path="wallet" element={<Wallet />} />
-              <Route path="analytics" element={<Analytics />}>
-                <Route path=":analyticCategory" element={<StatsItem />} />
-              </Route>
+              <Route path="graph" element={<StatsItems />} />
               <Route path="profile" element={<ProfilePage />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Paper>
       </ThemeProvider>
