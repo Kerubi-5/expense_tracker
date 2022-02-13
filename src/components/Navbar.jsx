@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import Logout from "./Logout";
+import walletImg from "../assets/wallet.png";
 
 import AppDrawer from "./AppDrawer";
 
@@ -26,8 +27,13 @@ const Navbar = ({ toggle, darkMode }) => {
           >
             <AppDrawer />
           </IconButton>
+          <img
+            style={{ marginRight: "0.5rem" }}
+            src={walletImg}
+            alt="company logo"
+          />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            KK App
+            KK - Expense Tracker
           </Typography>
 
           {loading ? null : user ? <Logout /> : null}
