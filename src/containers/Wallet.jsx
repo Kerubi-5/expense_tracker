@@ -54,7 +54,7 @@ const Wallet = () => {
             Your remaining balance
           </Typography>
           <Typography variant="h5" component="div">
-            &#8369; {wallet.money ? wallet.money : ""}
+            &#8369; {wallet.money ? wallet.money.toFixed(2) : ""}
           </Typography>
         </div>
 
