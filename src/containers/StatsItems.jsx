@@ -6,6 +6,7 @@ import { getDocs, query, where } from "firebase/firestore";
 import { startOfMonth, getMonth, format } from "date-fns";
 
 import { useState, useEffect } from "react";
+import { Container } from "@mui/material";
 
 const StatsItems = () => {
   const { user } = useAuth();
@@ -37,14 +38,16 @@ const StatsItems = () => {
     var result = [];
 
     return getData();
-  }, []);
+  }, [user.uid]);
 
   return (
     <>
-      <Typography variant="h4" gutterBottom component="div">
-        {format(getMonth(Date.now()), "MMMM")} Expenses
-      </Typography>
-      <PieChart expenses={category} />
+      <Container sm>
+        <Typography mt={5} variant="h4" gutterBottom component="div">
+          {format(getMonth(Date.now()), "MMMM")} Expenses
+        </Typography>
+        <PieChart expenses={category} />
+      </Container>
     </>
   );
 };
