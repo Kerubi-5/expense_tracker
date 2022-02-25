@@ -21,7 +21,6 @@ const Add = () => {
       const walletDoc = doc(walletRef, user.uid);
       const walletData = await getDoc(walletDoc);
       setWallet(walletData.data());
-      console.log(walletData.data());
     };
     return getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
