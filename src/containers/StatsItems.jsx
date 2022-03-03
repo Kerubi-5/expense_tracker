@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import { useAuth } from "../contexts/AuthContext";
 import { expensesRef } from "../utils/firebase";
 import { getDocs, query, where } from "firebase/firestore";
-import { startOfMonth, getMonth, format } from "date-fns";
+import { startOfMonth, format } from "date-fns";
 
 import { useState, useEffect } from "react";
 import { Container } from "@mui/material";
@@ -44,7 +44,7 @@ const StatsItems = () => {
     <>
       <Container sm>
         <Typography mt={5} variant="h4" gutterBottom component="div">
-          {format(getMonth(Date.now()), "MMMM")} Expenses
+          {format(Date.now(), "MMMM")} Expenses
         </Typography>
         <PieChart expenses={category} />
       </Container>
