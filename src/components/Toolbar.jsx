@@ -38,11 +38,7 @@ const Toolbar = ({ setValue, user }) => {
   };
   return (
     <div className="toolbar">
-      <div className="toolbar__title">
-        <Typography variant="h6" gutterBottom component="div">
-          Good day! {user.displayName}
-        </Typography>
-      </div>
+      <div className="toolbar__title"></div>
       <div className="toolbar__filter">
         <Button
           onClick={() => handleChange("")}
